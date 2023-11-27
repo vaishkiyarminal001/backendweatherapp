@@ -1,0 +1,23 @@
+package com.app.services;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.app.models.WeatherData;
+@Service
+public class WeatherService {
+
+	 private  RestTemplate restTemplate;
+	    private  String apiKey = "ca8e852754bcc8da59ba8da04af99058";
+
+	    public WeatherService(RestTemplate restTemplate) {
+	        this.restTemplate = restTemplate;
+	    }
+
+	    public WeatherData getWeatherByCity(String cityName) {
+	        String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + apiKey;
+	        return restTemplate.getForObject(apiUrl, WeatherData.class);
+	    }
+	
+	
+}
